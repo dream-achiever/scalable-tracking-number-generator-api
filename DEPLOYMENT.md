@@ -47,7 +47,9 @@ gcloud config set project YOUR_PROJECT_ID
 ./deploy.sh
 ```
 
-### Option 4: Heroku (Paid but cheap)
+### Option 4: Heroku (Low-cost - $5/month)
+
+**Note:** Heroku discontinued their free tier in November 2022, but offers affordable Eco dynos at $5/month.
 
 1. **Install Heroku CLI**
 2. **Create Heroku app:**
@@ -57,6 +59,8 @@ heroku create your-app-name
 heroku addons:create heroku-postgresql:mini
 git push heroku main
 ```
+
+**Cost:** $5/month for Eco dyno + $5/month for Mini Postgres
 
 ## 🔧 Environment Variables
 

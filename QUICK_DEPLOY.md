@@ -48,6 +48,48 @@
    ./deploy.sh
    ```
 
+## Option 4: Fly.io (Free tier available)
+
+1. **Install Fly CLI:**
+   ```bash
+   # macOS
+   brew install flyctl
+   
+   # Ubuntu
+   curl -L https://fly.io/install.sh | sh
+   ```
+
+2. **Deploy:**
+   ```bash
+   fly auth login
+   fly launch
+   fly deploy
+   ```
+
+**Free tier:** 3 shared-cpu-1x 256mb VMs, 160GB outbound data transfer
+
+## Option 5: Heroku (Low-cost - $5/month)
+
+**Note:** Heroku discontinued their free tier in November 2022, but offers affordable Eco dynos.
+
+1. **Install Heroku CLI:**
+   ```bash
+   # macOS
+   brew install heroku/brew/heroku
+   
+   # Ubuntu
+   curl https://cli-assets.heroku.com/install.sh | sh
+   ```
+
+2. **Deploy:**
+   ```bash
+   heroku create your-app-name
+   heroku addons:create heroku-postgresql:mini
+   git push heroku main
+   ```
+
+**Cost:** $5/month for Eco dyno + $5/month for Mini Postgres
+
 ## 🧪 Test Your Deployed API
 
 Once deployed, test with:
