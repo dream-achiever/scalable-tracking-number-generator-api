@@ -68,6 +68,7 @@ public class TrackingNumberController {
                    customerName, customerId);
         logger.debug("Request parameters - origin: {}, destination: {}, weight: {}, created_at: {}", 
                     originCountryId, destinationCountryId, weight, createdAt);
+        logger.debug("Customer details - name: {}, slug: {}", customerName, customerSlug);
         
         try {
             // Parse the timestamp
