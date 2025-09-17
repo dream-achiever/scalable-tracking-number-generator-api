@@ -1,0 +1,52 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: tracking-number-generator-api
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tracking_db
+    username: ${DB_USERNAME:tracking_user}
+    password: ${DB_PASSWORD:tracking_password}
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+logging:
+  level:
+    com.tracking: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+app:
+  tracking:
+    max-retries: 3
+    sequence-name: tracking_number_seq
+    min-length: 8
+    max-length: 16
