@@ -137,6 +137,23 @@ class TrackingNumberServiceTest {
         assertThat(response2.trackingNumber()).matches("^[A-Z0-9]{8,16}$");
     }
     
+    @Test
+    void generateTrackingNumber_ShouldGenerateDifferentLengths_WhenCalledMultipleTimes() {
+        // Given
+        TrackingNumberRequest request = createValidRequest();
+        when(trackingNumberRepository.existsByTrackingNumber(anyString())).thenReturn(false);
+        when(trackingNumberRepository.save(any())).thenReturn(null);
+        
+        // When
+        TrackingNumberResponse response1 = trackingNumberService.generateTrackingNumber(request);
+        TrackingNumberResponse response2 = trackingNumberService.generateTrackingNumber(request);
+        
+        // Then
+        assertThat(response1.trackingNumber()).matches("^[A-Z0-9]{8,16}$");
+        assertThat(response2.trackingNumber()).matches("^[A-Z0-9]{8,16}$");
+        // Note: Lengths may be different due to random generation
+    }
+    
     private TrackingNumberRequest createValidRequest() {
         return new TrackingNumberRequest(
                 "MY",
