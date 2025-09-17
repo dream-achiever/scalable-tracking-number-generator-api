@@ -24,7 +24,7 @@ import com.tracking.service.TrackingNumberService;
 /**
  * Unit tests for TrackingNumberController.
  */
-@WebMvcTest(TrackingNumberController.class)
+@WebMvcTest(controllers = TrackingNumberController.class)
 class TrackingNumberControllerTest {
     
     @Autowired
