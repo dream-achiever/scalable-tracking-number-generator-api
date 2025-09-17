@@ -41,6 +41,10 @@ public class TrackingNumberService {
     private static final int MIN_TRACKING_NUMBER_LENGTH = 8;
     private static final int MAX_TRACKING_NUMBER_LENGTH = 16;
     
+    // Retry delay configuration
+    private static final long MIN_RETRY_DELAY_MS = 10;
+    private static final long MAX_RETRY_DELAY_MS = 50;
+    
     public TrackingNumberService(TrackingNumberRepository trackingNumberRepository,
                                MeterRegistry meterRegistry,
                                @Value("${app.tracking.max-retries:3}") int maxRetries) {
@@ -140,7 +144,7 @@ public class TrackingNumberService {
             // Exponential backoff for retry
             if (attempt < maxRetries) {
                 try {
-                    long delay = ThreadLocalRandom.current().nextLong(10, 50) * attempt;
+                    long delay = ThreadLocalRandom.current().nextLong(MIN_RETRY_DELAY_MS, MAX_RETRY_DELAY_MS) * attempt;
                     Thread.sleep(delay);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
