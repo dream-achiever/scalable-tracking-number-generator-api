@@ -246,3 +246,13 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For support and questions, please open an issue in the repository or contact the development team.
+
+## Changelog
+
+### Version 1.0.0
+- Initial release with core tracking number generation functionality
+- Support for concurrent request handling
+- Comprehensive validation and error handling
+- Docker containerization and cloud deployment ready
+- Full test coverage with unit and integration tests
+- Monitoring and observability features
