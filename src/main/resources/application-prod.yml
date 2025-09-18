@@ -35,8 +35,8 @@ logging:
     com.tracking: INFO
     org.springframework.web: WARN
     org.hibernate.SQL: WARN
-    org.springframework.boot.autoconfigure: DEBUG
-    org.springframework.boot.context.properties: DEBUG
+    org.springframework.boot.autoconfigure: INFO
+    org.springframework.boot.context.properties: INFO
 
 management:
   endpoints:
