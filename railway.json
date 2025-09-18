@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "java -jar target/tracking-number-generator-api-1.0.0.jar",
+    "startCommand": "java -jar app.jar",
     "healthcheckPath": "/api/v1/next-tracking-number/health",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
