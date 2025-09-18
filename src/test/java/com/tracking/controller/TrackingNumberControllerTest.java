@@ -25,6 +25,9 @@ import com.tracking.service.TrackingNumberService;
  * Unit tests for TrackingNumberController.
  */
 @WebMvcTest(controllers = TrackingNumberController.class)
+// Exclude the JPA autoconfiguration to prevent database connection attempts
+
+@EnableAutoConfiguration(exclude = {JpaRepositoriesAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 class TrackingNumberControllerTest {
     
     @Autowired
