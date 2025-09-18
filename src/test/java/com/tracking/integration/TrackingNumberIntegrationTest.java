@@ -53,7 +53,7 @@ class TrackingNumberIntegrationTest {
         TrackingNumberRequest request = createValidRequest();
         
         // When
-        mockMvc.perform(get("/next-tracking-number")
+        mockMvc.perform(get("/api/v1/next-tracking-number")
                         .param("origin_country_id", request.originCountryId())
                         .param("destination_country_id", request.destinationCountryId())
                         .param("weight", request.weight().toString())
@@ -82,7 +82,7 @@ class TrackingNumberIntegrationTest {
         TrackingNumberRequest request2 = createValidRequest();
         
         // When
-        mockMvc.perform(get("/next-tracking-number")
+        mockMvc.perform(get("/api/v1/next-tracking-number")
                         .param("origin_country_id", request1.originCountryId())
                         .param("destination_country_id", request1.destinationCountryId())
                         .param("weight", request1.weight().toString())
@@ -93,7 +93,7 @@ class TrackingNumberIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         
-        mockMvc.perform(get("/next-tracking-number")
+        mockMvc.perform(get("/api/v1/next-tracking-number")
                         .param("origin_country_id", request2.originCountryId())
                         .param("destination_country_id", request2.destinationCountryId())
                         .param("weight", request2.weight().toString())
@@ -111,7 +111,7 @@ class TrackingNumberIntegrationTest {
     @Test
     void generateTrackingNumber_ShouldReturnBadRequest_WhenRequiredParametersAreMissing() throws Exception {
         // When & Then
-        mockMvc.perform(get("/next-tracking-number")
+        mockMvc.perform(get("/api/v1/next-tracking-number")
                         .param("origin_country_id", "MY")
                         .param("destination_country_id", "ID")
                         // Missing weight parameter
