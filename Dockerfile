@@ -35,9 +35,6 @@ WORKDIR /app
 # Copy the built JAR from builder stage
 COPY --from=builder /app/target/tracking-number-generator-api-*.jar app.jar
 
-# Create log directory
-RUN mkdir -p /var/log/tracking-api && chown -R tracking:tracking /var/log/tracking-api
-
 # Switch to non-root user
 USER tracking
 
