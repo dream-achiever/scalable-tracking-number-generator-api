@@ -19,7 +19,7 @@ COPY src src
 RUN ./mvnw clean package -DskipTests
 
 # Production stage
-FROM openjdk:21-jre-slim
+FROM openjdk:21-jdk-slim
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y \
