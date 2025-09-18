@@ -86,7 +86,7 @@ class TrackingNumberControllerTest {
                         .param("customer_name", "Test Customer")
                         .param("customer_slug", "test-customer")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
+                        .andExpect(status().isBadRequest());
     }
     
     @Test
