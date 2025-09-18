@@ -7,12 +7,10 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -28,10 +26,11 @@ import com.tracking.service.TrackingNumberService;
 /**
  * Unit tests for TrackingNumberController.
  */
-@WebMvcTest(controllers = TrackingNumberController.class)
-// Exclude the JPA autoconfiguration to prevent database connection attempts
-
-@EnableAutoConfiguration(exclude = {JpaRepositoriesAutoConfiguration.class, HibernateJpaAutoConfiguration.class, DataSourceAutoConfiguration.class})
+@WebMvcTest(controllers = TrackingNumberController.class, 
+    includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = TrackingNumberController.class),
+    excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {
+        com.tracking.TrackingNumberGeneratorApplication.class
+    }))
 class TrackingNumberControllerTest {
     
     @Autowired
@@ -59,7 +58,7 @@ class TrackingNumberControllerTest {
                 .thenReturn(response);
         
         // When & Then
-        mockMvc.perform(get("/api/v1/next-tracking-number")
+        mockMvc.perform(get("/next-tracking-number")
                         .param("origin_country_id", request.originCountryId())
                         .param("destination_country_id", request.destinationCountryId())
                         .param("weight", request.weight().toString())
@@ -78,7 +77,7 @@ class TrackingNumberControllerTest {
     @Test
     void generateTrackingNumber_ShouldReturnBadRequest_WhenValidationFails() throws Exception {
         // When & Then
-        mockMvc.perform(get("/api/v1/next-tracking-number")
+        mockMvc.perform(get("/next-tracking-number")
                         .param("origin_country_id", "INVALID") // Invalid country code
                         .param("destination_country_id", "ID")
                         .param("weight", "1.234")
@@ -93,7 +92,7 @@ class TrackingNumberControllerTest {
     @Test
     void health_ShouldReturnOk_WhenCalled() throws Exception {
         // When & Then
-        mockMvc.perform(get("/api/v1/next-tracking-number/health"))
+        mockMvc.perform(get("/next-tracking-number/health"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.status").value("UP"))
