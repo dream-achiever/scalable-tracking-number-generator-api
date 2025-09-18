@@ -11,6 +11,9 @@ echo "🚀 Starting deployment of Tracking Number Generator API..."
 if ! command -v gcloud &> /dev/null; then
     echo "❌ gcloud CLI is not installed. Please install it first."
     echo "Visit: https://cloud.google.com/sdk/docs/install"
+    echo ""
+    echo "For macOS: brew install google-cloud-sdk"
+    echo "For Ubuntu: curl https://sdk.cloud.google.com | bash"
     exit 1
 fi
 
@@ -25,6 +28,13 @@ PROJECT_ID=${GOOGLE_CLOUD_PROJECT:-"your-project-id"}
 
 if [ "$PROJECT_ID" = "your-project-id" ]; then
     echo "❌ Please set GOOGLE_CLOUD_PROJECT environment variable or update the script with your project ID."
+    echo ""
+    echo "To set your project ID:"
+    echo "export GOOGLE_CLOUD_PROJECT=your-actual-project-id"
+    echo ""
+    echo "Or create a new project:"
+    echo "gcloud projects create tracking-api-$(date +%s) --name='Tracking API'"
+    echo "gcloud config set project tracking-api-$(date +%s)"
     exit 1
 fi
 
