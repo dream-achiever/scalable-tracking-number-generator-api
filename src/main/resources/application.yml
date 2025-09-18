@@ -3,19 +3,6 @@ spring:
     active: dev
   application:
     name: tracking-number-generator-api
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    show-sql: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-  datasource:
-    url: jdbc:postgresql://localhost:5432/tracking_db
-    username: ${DB_USERNAME:tracking_user}
-    password: ${DB_PASSWORD:tracking_password}
-    driver-class-name: org.postgresql.Driver
 
 server:
   port: 8080
