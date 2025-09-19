@@ -47,3 +47,6 @@ management:
   endpoint:
     health:
       show-details: when-authorized
+  health:
+    probes:
+      enabled: true
