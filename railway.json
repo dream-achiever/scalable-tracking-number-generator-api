@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "java -jar app.jar",
+    "startCommand": "java -XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/heapdump.hprof -jar app.jar",
     "healthcheckPath": "/api/v1/next-tracking-number/health",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
